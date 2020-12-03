@@ -26,7 +26,10 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY_ID
     secret_access_key: $AWS_SECRET_ACCESS_KEY
 
-  
+after_success:
+  - docker build -t pointinsights/springboot-gt-beta:latest .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push pointinsights/springboot-gt-beta:latest
 
  
 
