@@ -12,6 +12,19 @@ before_install:
   
 script: ./mvnw clean install 
 
+deploy:
+  provider: elasticbeanstalk
+  skip_cleanup: true
+  region: us-east-2
+  app: springboot-gt-beta
+  env: SpringbootGtBeta-env
+  zip_file: 'target/springboot-gt-beta-0.0.1-SNAPSHOT.jar'
+  bucket_name: elasticbeanstalk-us-east-2-394696843852
+  bucket_path: springboot-gt-beta
+  on:
+    branch: main
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
 
   
 
